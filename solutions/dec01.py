@@ -12,10 +12,10 @@ for line in data:
 # PART ONE
 # Function to process the increase / decrease
 def is_increase(first_input: int, second_input):
-    if first_input > second_input:
-        return 0
-    else:
+    if second_input > first_input:
         return 1
+    else:
+        return 0
 
 def part_one_process(list_of_inputs: list):
     number_of_increases = 0
@@ -34,20 +34,18 @@ print(part_one_process(clean_data))
 # PART TWO
 def sliding_window(item_list: list, window_size: int = 3):
     sections = []
-    sliding_section = []
-    for item in item_list:
-        if len(sliding_section) < window_size:
-            sliding_section.append(item)
-        else:
-            sliding_section = sliding_section[1:]
-            sliding_section.append(item)
-            sections.append(sliding_section)
-    return len(sections)
+    offset = 0
+    for i in range(len(item_list)):
+        section = item_list[offset:offset + window_size]
+        sections.append(section)
+        offset +=1
+    return sections
 
 def part_two_process(list_of_inputs: list):
+    sections = sliding_window(list_of_inputs)[:-2]
     number_of_increases = 0
     previous_input = None
-    for item in list_of_inputs:
+    for item in sections:
         if not previous_input:
             previous_input = sum(item)
         else:
@@ -57,4 +55,4 @@ def part_two_process(list_of_inputs: list):
             previous_input = section_sum
     return number_of_increases
 
-sliding_window(clean_data)
+print(part_two_process(clean_data))
