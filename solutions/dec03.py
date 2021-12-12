@@ -31,23 +31,33 @@ gamma = generate_reading(data, gamma=True)
 epsilon = generate_reading(data, gamma=False)
 #print(gamma * epsilon)
 
+def filter_list(list_, range, criteria):
+    for i in range(range):
+        data = []
+        for x in list_:
+            if x[i] == critera:
+                data.append(x)
+    return data
+
 def rating_reader(starting_list: list, oxygen: bool = True):
     data = starting_list
     results = []
-    for i in range(12):
+    for i in range(11):
         digits = [ int(x[i]) for x in data ]
         reading  = sum(digits) / len(data)
         result = convert_reading(reading, most_common=oxygen)
-        print(result)
         results.append(str(result))
-        
-        new_data = []
+        new_list = []
         for entry in data:
-            if entry[i] == result:
-                new_data.append(entry)
-        data = new_data
+            if entry[i] == str(result):
+                new_list.append(entry)
+        data = new_list
+        if len(new_list) == 1:
+            break
     return int(''.join(results),2)
 
 oxygen = rating_reader(data, oxygen=True)
+print(oxygen)
 co2 = rating_reader(data, oxygen=False)
+print(co2)
 print(oxygen * co2)
