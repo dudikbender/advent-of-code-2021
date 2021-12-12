@@ -42,7 +42,7 @@ def filter_list(list_, range, criteria):
 def rating_reader(starting_list: list, oxygen: bool = True):
     data = starting_list
     results = []
-    for i in range(11):
+    for i in range(12):
         digits = [ int(x[i]) for x in data ]
         reading  = sum(digits) / len(data)
         result = convert_reading(reading, most_common=oxygen)
@@ -52,7 +52,7 @@ def rating_reader(starting_list: list, oxygen: bool = True):
             if entry[i] == str(result):
                 new_list.append(entry)
         data = new_list
-        if len(new_list) == 1:
+        if len(new_list) == 0:
             break
     return int(''.join(results),2)
 
