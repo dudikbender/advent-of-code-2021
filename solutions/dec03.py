@@ -29,7 +29,7 @@ def generate_reading(data: list, gamma: bool = True):
 
 gamma = generate_reading(data, gamma=True)
 epsilon = generate_reading(data, gamma=False)
-#print(gamma * epsilon)
+print(f'Part One answer: {gamma * epsilon}')
 
 def rating_reader(starting_list: list, oxygen: bool = True):
     data = starting_list
@@ -44,11 +44,8 @@ def rating_reader(starting_list: list, oxygen: bool = True):
         data = new_list
         if len(new_list) == 1:
             break
-        
     return int(''.join(data),2)
 
 oxygen = rating_reader(data, oxygen=True)
-print(oxygen)
 co2 = rating_reader(data, oxygen=False)
-print(co2)
-print(oxygen * co2)
+print(f'Part Two answer: {oxygen * co2}')
